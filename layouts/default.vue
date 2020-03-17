@@ -8,6 +8,8 @@
 .pika-bg {
   @apply min-h-screen;
   background: url(../assets/img/bg.svg) #f4f4f4;
+  background-attachment: fixed;
   background-position: center;
+  background-repeat: no-repeat;
 }
 </style>

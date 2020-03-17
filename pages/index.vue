@@ -1,13 +1,14 @@
 <template>
   <div class="container">
-    <div class="bg-red-400">
-      Nah maybe
-    </div>
+    <CurrentTeam />
+    <Pokedex />
   </div>
 </template>
 
 <script>
+import CurrentTeam from '../components/Pokedex/CurrentTeam'
+import Pokedex from '../components/Pokedex/Pokedex'
 export default {
-  components: {}
+  components: { CurrentTeam, Pokedex }
 }
 </script>
