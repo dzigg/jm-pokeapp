@@ -1,10 +1,12 @@
 <template>
   <section class="current-team">
-    <h3 class="text-5xl font-bold leading-none font-tinos">
+    <h3 class="mt-12 text-3xl font-bold leading-none font-tinos">
       Choose your team
     </h3>
 
-    <ul class="flex items-center justify-between lg:flex-col lg:justify-start">
+    <ul
+      class="flex items-center justify-between mt-8 lg:flex-col lg:justify-start lg:mt-0"
+    >
       <li v-for="(poke, index) in pokemon" :key="`pokemon number: ${index}`">
         <button class="p-0 m-0" @click="removePoke(poke)">
           <img class="taken-slot" :src="poke.sprite" :alt="poke.name" />
@@ -20,6 +22,23 @@
           />
         </button>
       </li>
+
+      <nuxt-link class="custom-link" to="/party">
+        <span>Party</span>
+        <svg
+          width="27"
+          height="10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M24.11 4.2l-3.156-3.157 1.04-1.04 4.412 4.413a.735.735 0 010 1.04l-4.412 4.412-1.04-1.04 3.157-3.157H.883v-1.47h23.228z"
+            fill="#fff"
+          />
+        </svg>
+      </nuxt-link>
     </ul>
   </section>
 </template>

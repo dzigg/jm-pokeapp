@@ -1,5 +1,17 @@
 <template>
-  <button class="poke-card" @click="selectPoke(pokeData, $event)">
+  <div class="poke-card">
+    <button class="delete-btn" @click="removePoke(pokeData)">
+      <svg width="8" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M1 1l6 6m0-6L1 7"
+          stroke="#333"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+
     <img
       class="poke-sprite"
       :src="pokeData.sprite ? pokeData.sprite : `../../assets/img/pokeball.svg`"
@@ -7,7 +19,7 @@
 
     <div class="poke-no">#{{ pokeData.id }}</div>
 
-    <div class="mt-3 text-2xl capitalize text-dark-gray font-tinos">
+    <div class="mt-3 text-xl capitalize md:text-2xl text-dark-gray font-tinos">
       {{ pokeData.name }}
     </div>
 
@@ -21,7 +33,7 @@
         {{ type.type.name }}
       </span>
     </div>
-  </button>
+  </div>
 </template>
 
 <script>
@@ -34,21 +46,10 @@ export default {
       }
     }
   },
-  computed: {
-    selected() {
-      return this.$store.state.pokemon.party.some(
-        (e) => e.id === this.pokeData.id
-      )
-    }
-  },
+  computed: {},
   methods: {
-    selectPoke(poke, event) {
-      event.preventDefault()
-      if (this.$store.state.pokemon.party.some((e) => e.id === poke.id)) {
-        this.$store.commit('party/remove', poke)
-      } else if (this.$store.state.pokemon.party.length !== 6) {
-        this.$store.commit('party/add', poke)
-      }
+    removePoke(poke) {
+      this.$store.commit('pokemon/remove', poke)
     }
   }
 }
@@ -56,10 +57,11 @@ export default {
 
 <style lang="postcss" scoped>
 .poke-card {
-  @apply relative mt-12 border-2 pt-12 pb-4 border-white border-solid rounded-lg bg-light-gray shadow-card text-center;
+  @apply relative mt-12 pt-12 pb-6 rounded-lg bg-light-gray shadow-card text-center;
   background-image: url('../../assets/img/intersect.svg');
   background-position: top center;
   background-repeat: no-repeat;
+  border: 4px solid rgba(16, 123, 106, 0.4);
   width: 100%;
   max-width: calc(50% - 20px);
   margin: 30px 10px;
@@ -78,6 +80,28 @@ export default {
     box-shadow: 0 0 0 3px rgb(101, 196, 255) !important;
   }
 }
+
+.delete-btn {
+  @apply absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 100px;
+  background-color: #f8f8f8;
+  border: 1px solid #fff;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05),
+    -10px -10px 4px rgba(255, 255, 255, 0.2);
+  & svg {
+    @apply absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 .poke-sprite {
   @apply absolute;
   transform: translate(-50%, -50%);

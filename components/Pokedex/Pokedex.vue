@@ -51,10 +51,13 @@ export default {
   left: 0;
 }
 .pokedex {
-  @apply flex flex-wrap justify-start items-start content-start;
+  @apply flex flex-wrap justify-start content-start;
   min-height: 110vh;
   margin: 0 -10px;
-  margin-top: 50px;
+  margin-top: 30px;
+  @screen lg {
+    margin-top: 50px;
+  }
   @screen xl {
     margin-top: 100px;
   }

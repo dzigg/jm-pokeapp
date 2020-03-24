@@ -11,15 +11,15 @@
 
     <div class="poke-no">#{{ pokeData.id }}</div>
 
-    <div class="mt-3 text-2xl capitalize text-dark-gray font-tinos">
+    <div class="mt-3 text-xl capitalize md:text-2xl text-dark-gray font-tinos">
       {{ pokeData.name }}
     </div>
 
-    <div class="flex justify-center mt-2">
+    <div class="flex flex-col justify-center mt-2 md:flex-row">
       <span
         v-for="(type, index) in pokeData.types"
         :key="index"
-        class="px-2 py-1 mx-1 text-sm text-white capitalize rounded-md "
+        class="px-2 py-1 mx-2 my-1 text-sm text-white capitalize rounded-md md:mx-1 mdmy-0 "
         :class="`bg-${type.type.name}`"
       >
         {{ type.type.name }}
