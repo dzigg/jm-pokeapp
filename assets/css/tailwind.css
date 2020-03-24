@@ -1,9 +1,9 @@
 /* purgecss start ignore */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
-/* purgecss end ignore */
 @import 'tailwindcss/utilities';
 
+/* purgecss end ignore */
 .container {
   padding-top: 63px;
   @screen lg {
