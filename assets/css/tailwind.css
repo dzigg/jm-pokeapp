@@ -3,3 +3,11 @@
 @import 'tailwindcss/components';
 /* purgecss end ignore */
 @import 'tailwindcss/utilities';
+
+.container {
+  padding-top: 63px;
+  @screen lg {
+    max-width: 650px;
+    padding-top: 80px;
+  }
+}

@@ -1,22 +1,13 @@
 <template>
   <section class="current-team">
-    <h3 class="text-5xl font-bold leading-none">
+    <h3 class="text-5xl font-bold leading-none font-tinos">
       Choose your team
     </h3>
 
-    <button class="randomize-party" @click="random">Random</button>
-    <button class="randomize-party" @click="removeAll">Random</button>
-
     <ul class="flex items-center justify-between lg:flex-col lg:justify-start">
-      <li v-for="(poke, index) in pokemon" :key="index">
+      <li v-for="(poke, index) in pokemon" :key="`pokemon number: ${index}`">
         <button class="p-0 m-0" @click="removePoke(poke)">
-          <img
-            class="taken-slot"
-            :src="
-              `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.pokeNo}.png`
-            "
-            alt=""
-          />
+          <img class="taken-slot" :src="poke.sprite" :alt="poke.name" />
         </button>
       </li>
 
@@ -38,19 +29,19 @@ export default {
   name: 'CurrentTeam',
   computed: {
     pokemon() {
-      return this.$store.state.party.list
+      return this.$store.state.pokemon.party
     },
     slotsLeft() {
-      return 6 - this.$store.state.party.list.length
+      return 6 - this.$store.state.pokemon.party.length
     }
   },
   methods: {
     removePoke(poke) {
-      this.$store.commit('party/remove', poke.pokeNo)
+      this.$store.commit('pokemon/remove', poke)
     },
     ...mapMutations({
-      random: 'party/random',
-      removeAll: 'party/removeAll'
+      random: 'pokemon/random',
+      removeAll: 'pokemon/removeAll'
     })
   }
 }
@@ -59,9 +50,12 @@ export default {
 .current-team {
   @screen lg {
     position: fixed;
-    top: 50%;
+    top: 140px;
     left: calc(50% + 400px);
-    transform: translateY(-50%);
+    @screen xl {
+      top: 200px;
+    }
+    /* transform: translateY(-50%); */
   }
 
   & h3 {

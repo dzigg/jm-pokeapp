@@ -7,6 +7,10 @@
 module.exports = {
   theme: {
     extend: {
+      fontFamily: {
+        tinos: 'Tinos',
+        'work-sans': '"Work Sans"'
+      },
       colors: {
         'light-gray': '#f9f9f9',
         'light-gray-2': '#f8f8f8',

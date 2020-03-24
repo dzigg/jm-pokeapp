@@ -2,23 +2,22 @@
   <button
     class="poke-card"
     :class="{ selected: selected }"
-    @click="selectPoke(pokedexNo, $event)"
+    @click="selectPoke(pokeData, $event)"
   >
     <img
-      v-if="poke.sprites.front_default"
       class="poke-sprite"
-      :src="poke.sprites.front_default"
+      :src="pokeData.sprite ? pokeData.sprite : `../../assets/img/pokeball.svg`"
     />
-    <img v-else class="poke-sprite" src="../../assets/img/pokeball.svg" />
-    <div class="poke-no">#{{ pokedexNo }}</div>
 
-    <div class="mt-3 text-2xl capitalize text-dark-gray">
-      {{ poke.name }}
+    <div class="poke-no">#{{ pokeData.id }}</div>
+
+    <div class="mt-3 text-2xl capitalize text-dark-gray font-tinos">
+      {{ pokeData.name }}
     </div>
 
     <div class="flex justify-center mt-2">
       <span
-        v-for="(type, index) in poke.types"
+        v-for="(type, index) in pokeData.types"
         :key="index"
         class="px-2 py-1 mx-1 text-sm text-white capitalize rounded-md "
         :class="`bg-${type.type.name}`"
@@ -30,37 +29,23 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
-  props: ['empty', 'pokedexNo'],
-  data() {
-    return {
-      poke: {
-        sprites: { front_default: '' }
-      }
-    }
-  },
+  props: ['pokeData'],
+
   computed: {
     selected() {
-      return this.$store.state.party.list.some(
-        (e) => e.pokeNo === this.pokedexNo
+      return this.$store.state.pokemon.party.some(
+        (e) => e.id === this.pokeData.id
       )
     }
-  },
-  mounted() {
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${this.pokedexNo}/`)
-      .then((response) => {
-        this.poke = response.data
-      })
   },
   methods: {
     selectPoke(poke, event) {
       event.preventDefault()
-      if (this.$store.state.party.list.some((e) => e.pokeNo === poke)) {
-        this.$store.commit('party/remove', poke)
-      } else if (this.$store.state.party.list.length !== 6) {
-        this.$store.commit('party/add', poke)
+      if (this.$store.state.pokemon.party.some((e) => e.id === poke.id)) {
+        this.$store.commit('pokemon/remove', poke)
+      } else if (this.$store.state.pokemon.party.length !== 6) {
+        this.$store.commit('pokemon/add', poke)
       }
     }
   }
@@ -89,12 +74,12 @@ export default {
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgb(101, 196, 255) !important;
-    /* border-color: rgb(45, 145, 208) !important; */
   }
 
   &.selected {
     @apply shadow-lg;
     transform: translateY(-2px);
+    background-color: #f3fff4;
     border: 4px solid rgba(16, 123, 106, 0.4);
   }
 }
@@ -106,7 +91,8 @@ export default {
 }
 
 .poke-no {
-  @apply bg-light-gray-3 inline-block text-center rounded-full font-bold;
+  @apply inline-block text-center rounded-full font-bold;
+  background-color: rgba(20, 20, 20, 0.1);
   font-size: 9px;
   padding: 4px 10px;
   color: #5c5c5c;

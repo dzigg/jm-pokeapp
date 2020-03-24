@@ -1,8 +1,19 @@
 <template>
   <div class="pika-bg">
+    <Navigation />
     <nuxt />
   </div>
 </template>
+
+<script>
+import Navigation from '../components/Navigation'
+export default {
+  components: { Navigation },
+  created() {
+    this.$store.dispatch('pokemon/getInitialPokemon')
+  }
+}
+</script>
 
 <style lang="postcss" scoped>
 .pika-bg {

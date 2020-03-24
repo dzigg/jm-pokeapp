@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3 class="text-4xl font-bold leading-none page-title">
+    <h3 class="text-4xl font-bold leading-none page-title font-tinos">
       Choose your team
     </h3>
     <CurrentTeam />
@@ -17,17 +17,11 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.container {
-  @screen lg {
-    max-width: 650px;
-  }
-}
-
 .page-title {
   @apply hidden;
   @screen lg {
     @apply block;
-    width: 140px;
+    width: 160px;
     position: fixed;
     top: 50%;
     left: calc(50% - 500px);
